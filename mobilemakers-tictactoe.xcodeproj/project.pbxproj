@@ -416,6 +416,7 @@
 				990604661B05462800BF7DC6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		990604671B05462800BF7DC6 /* Build configuration list for PBXNativeTarget "mobilemakers-tictactoeTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +425,7 @@
 				990604691B05462800BF7DC6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
