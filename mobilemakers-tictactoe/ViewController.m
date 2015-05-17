@@ -10,6 +10,10 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *gameButton;
+@property (weak, nonatomic) IBOutlet UIImageView *playerImage;
+
+
+
 
 @property NSMutableArray *gameStateArray;
 @property NSMutableArray *winStateArray;
@@ -27,7 +31,7 @@
     [super viewDidLoad];
     self.goNumber = 0;
     self.winner = 0;
-    self.gameStateArray = [[NSMutableArray alloc]init];
+    self.gameStateArray = [NSMutableArray new];
     self.gameStateArray = [NSMutableArray arrayWithObjects:@0,@0,@0,@0,@0,@0,@0,@0,@0, nil];
     self.winStateArray  = [NSMutableArray new];
     self.winStateArray  = [NSMutableArray arrayWithObjects:
@@ -42,15 +46,22 @@
 }
 
 - (IBAction)onGameButtonPressed:(id)sender {
-    NSLog(@"%@",[sender currentTitle]);
+//    NSLog(@"%@",[sender tag]);
+
+    if (self.gameStateArray[[sender tag]] == @0 && self.winner == 0) {
 
     //alternating turns
     if (self.goNumber % 2 == 0) {
         [self.gameStateArray replaceObjectAtIndex:[sender tag] withObject:@1];
+        [sender setImage:[UIImage imageNamed:@"grumpycat"] forState:UIControlStateNormal];
+        [sender setSelected:YES];
     } else {
-        [self.gameStateArray replaceObjectAtIndex:[sender tag] withObject:@2]; //for now, but change later
+        [self.gameStateArray replaceObjectAtIndex:[sender tag] withObject:@2];
+        [sender setImage:[UIImage imageNamed:@"doge-head"] forState:UIControlStateNormal];
+        [sender setSelected:YES];
     }
     self.goNumber = self.goNumber + 1;
+    }
 
 }
 
@@ -68,18 +79,17 @@
 //        NSLog(@"meh");
 //    }
 
-    for (NSObject *ugh in self.winStateArray) {
-        if (self.gameStateArray[(int)self.winStateArray[0]] == self.gameStateArray[(int)self.winStateArray[1]] && self.gameStateArray[(int)self.winStateArray[1]] == self.gameStateArray[(int)self.winStateArray[2]] && self.gameStateArray[(int)self.winStateArray[0]] != 0) {
-            NSLog(@"%@",ugh);
-        } else {
-            NSLog(@"failwhale");
-        }
-
-    }
-
-
-
+//    for (NSObject *ugh in self.winStateArray) {
+//        if (self.gameStateArray[(int)self.winStateArray[0]] == self.gameStateArray[(int)self.winStateArray[1]] && self.gameStateArray[(int)self.winStateArray[1]] == self.gameStateArray[(int)self.winStateArray[2]] && self.gameStateArray[(int)self.winStateArray[0]] != 0) {
+//            NSLog(@"%@",ugh);
+//        } else {
+//            NSLog(@"failwhale");
+//        }
+//
+//    }
 
 }
+
+
 
 @end
