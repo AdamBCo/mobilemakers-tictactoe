@@ -12,8 +12,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *gameButton;
 
 @property NSMutableArray *gameStateArray;
-@property NSMutableArray *testStateArray;
 @property NSMutableArray *winStateArray;
+
+@property int goNumber;
+@property NSInteger winner;
 
 
 @end
@@ -23,11 +25,10 @@
 //a - empy b - first player c - second player
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.goNumber = 0;
+    self.winner = 0;
     self.gameStateArray = [NSMutableArray new];
-    self.gameStateArray = [NSMutableArray arrayWithObjects:@"a",@"a",@"a",@"a",@"a",@"a",@"a",@"a",@"a", nil];
-
-    self.testStateArray = [[NSMutableArray alloc] initWithCapacity:9];
-    self.testStateArray = [NSMutableArray arrayWithObjects:@"b",@"b",@"b",@"b",@"b",@"b",@"b",@"b",@"b", nil];
+    self.gameStateArray = [NSMutableArray arrayWithObjects:@0,@0,@0,@0,@0,@0,@0,@0,@0, nil];
 
     self.winStateArray = [NSMutableArray new];
     self.winStateArray = [NSMutableArray arrayWithObjects:
@@ -39,25 +40,35 @@
                           [NSMutableArray arrayWithObjects:@[@2,@5,@8], nil],
                           [NSMutableArray arrayWithObjects:@[@0,@4,@8], nil],
                           [NSMutableArray arrayWithObjects:@[@2,@4,@6], nil],nil];
-
-
-    //test
-    NSLog(@"%@",self.gameStateArray);
 }
 
 - (IBAction)onGameButtonPressed:(id)sender {
     NSLog(@"%@",[sender currentTitle]);
 
-    [self.gameStateArray replaceObjectAtIndex:[sender tag] withObject:@"b"];
-    NSLog(@"%@",self.gameStateArray);
-
-    //ugh
-    if (self.gameStateArray == self.testStateArray) {
-        NSLog(@"It can be done");
+    //alternating turns
+    if (self.goNumber % 2 == 0) {
+        [self.gameStateArray replaceObjectAtIndex:[sender tag] withObject:@1];
     } else {
-        NSLog(@"Keep tryin'");
+        [self.gameStateArray replaceObjectAtIndex:[sender tag] withObject:@2];
     }
+    self.goNumber = self.goNumber + 1;
 
 }
+
+- (IBAction)testButton:(id)sender {
+    NSLog(@"%@",self.gameStateArray);
+
+
+
+    //test for loop
+    for (int i = 1; i <= 10; i++) {
+        NSLog(@"%d",i);
+    }
+
+    //test for in loop
+    int derp = (int)self.gameStateArray[1];
+    NSLog(@"%i",derp);
+}
+
 
 @end
